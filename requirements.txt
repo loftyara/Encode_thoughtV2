@@ -1,0 +1,12 @@
+torch
+transformers
+datasets
+numpy
+tqdm
+matplotlib
+einops
+scikit-learn
+protobuf
+tokenizers
+sentencepiece
+tiktoken
