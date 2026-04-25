@@ -7,9 +7,13 @@ Version 1 (Theoretical): https://github.com/loftyara/Encode_thought/ or https://
 
 ## KEY HIGHLIGHTS
 Model-Agnostic Pipeline: Compatible with any transformer encoder. Currently optimized and validated with prajjwal1/bert-mini (256d).
+
 Ultra-Minimal Configuration: 1 slot, internal dimension 64, 1 encoder/decoder layer, 4 induced points. Total trainable parameters: approximately 0.8 to 0.9 million (less than 2 percent of the base LLM).
+
 Hybrid Loss and Regularization: CrossEntropy (alpha=0.2) plus CosineLoss (beta=1.0) with label smoothing (0.1) and Context Dropout (p=0.15) for stable parallel training.
+
 Phase 1 Complete: Achieves 80 to 90 percent lexical reconstruction and greater than 0.99 cosine similarity in Teacher Forcing (Corrected) mode.
+
 Transparent Limitations: Autoregressive generation (AR and Raw AR) currently collapses into repetition loops due to Exposure Bias. Stabilizing closed-loop generation is the sole focus of next phase.
 
 ## ARCHITECTURE OVERVIEW
@@ -101,9 +105,9 @@ Encode_thoughtV2/
 ## CURRENT EXPERIMENTAL RESULTS (TinyStories + bert-mini)
 |Mode|Context Source|Lexical Accuracy|Status|
 |----|--------------|----------------|------|
-|Corrected (Teacher Forcing)|Ground Truth|80 to 90 percent|Preserves plot, entities, and semantics. Minor subtoken artifacts and local repetitions at sentence boundaries.|
-|AR (Quantized Context)|Own Predictions|Approximately 0 percent|Collapses into high-frequency token loops after 5 to 10 steps.|
-|Raw AR|Raw Embeddings|Approximately 0 percent|Similar collapse with semantic drift.|
+|Corrected (Teacher Forcing)|Ground Truth|80 to 90 %|Preserves plot, entities, and semantics. Minor subtoken artifacts and local repetitions at sentence boundaries|
+|AR (Quantized Context)|Own Predictions|Approximately 0%|Collapses into high-frequency token loops after 5 to 10 steps|
+|Raw AR|Raw Embeddings|Approximately 0%|Similar collapse with semantic drift|
 
 Diagnosis: The architecture successfully compresses and reconstructs semantics when provided with a valid context window. AR failure is strictly due to Exposure Bias (distribution shift between training and inference), not capacity limits or architectural flaws. Scaling parameters does not resolve this; it requires a shift to sequence-level training paradigms.
 
