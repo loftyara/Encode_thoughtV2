@@ -53,7 +53,7 @@ source venv/bin/activate
 ```
 Install PyTorch:
 ```
-pip install torch --index-url https://download.pytorch.org/whl/cu121
+pip install torch --index-url https://download.pytorch.org/whl/cu130
 ```
 Install dependencies:
 ```
